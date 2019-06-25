@@ -39,7 +39,18 @@ function afterConnection() {
         if (err) throw err;
         // if any err then we throw it so the user can see it
         // if (err) throw err;
-        console.log(res);
+        for (let i = 0; i < res.length; i++) {
+            // print id
+            console.log(`Item ID: ${res[i].id}`);
+            // product
+            console.log(`Product: ${res[i].product}`);
+            // department
+            console.log(`Department: ${res[i].department}`);
+            // price
+            console.log(`Price: ${res[i].price}`);
+            // next item
+            console.log(`**** Next Item ****`);
+        }
         userPrompt();
         // connection.end();
     });
@@ -61,15 +72,15 @@ const userPrompt = function() {
             name: "itemNum"
         }
     ]).then(function(user) {
-        var itemID = JSON.stringify(user.itemID);
+        // var itemID = JSON.stringify(user.itemID);
         // console.log(10 - itemID);
 
-        console.log(`Item ID: ${user.itemID}`);
+        console.log(`Item Ordered ID: ${user.itemID}`);
 
-        var quantityOrdered = JSON.stringify(user.itemNum);
+        // var quantityOrdered = JSON.stringify(user.itemNum);
         // console.log(itemNum);
 
-        console.log(`Quantity: ${user.itemNum}`);
+        console.log(`Quantity to Order: ${user.itemNum}`);
 
         // after user has placed an order
         quantityCheck();
@@ -77,9 +88,9 @@ const userPrompt = function() {
         function quantityCheck() {
 
             console.log("Checking Inventory: ");
-            var query = connection.query(`SELECT stock FROM products WHERE id Like '${user.itemID}'`, function(err, res) {
+            connection.query(`SELECT stock FROM products WHERE id Like '${user.itemID}'`, function(err, res) {
                 if (err) throw err;
-                console.log(res[0]);
+                // console.log(res[0].stock);
                 // var stock = res[0].stock;
                 // pull the stock
                 console.log(`Current Stock: ${res[0].stock}`);
@@ -93,7 +104,8 @@ const userPrompt = function() {
                     // update SQL database remaining quantity if enough quantity
                     console.log("Your order is going through!");
                     // updateProduct();
-                    console.log(`USER ITEM ID: ${user.itemID}`);
+                    // console.log(`USER ITEM ID: ${user.itemID}`);
+                    // shows how many left
                     console.log(`Quantity Left: ${res[0].stock - user.itemNum}`);
                     var quantityLeft = res[0].stock - user.itemNum;
                     var query = connection.query(`UPDATE products SET stock = ${quantityLeft} WHERE id = ${user.itemID}`,
