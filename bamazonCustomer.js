@@ -40,9 +40,9 @@ function afterConnection() {
         // if any err then we throw it so the user can see it
         // if (err) throw err;
         console.log(res);
-        connection.end();
+        userPrompt();
+        // connection.end();
     });
-    userPrompt();
 }
 
 const userPrompt = function() {
@@ -64,37 +64,69 @@ const userPrompt = function() {
         var itemID = JSON.stringify(user.itemID);
         // console.log(10 - itemID);
 
-        console.log(10 - user.itemID);
+        console.log(`Item ID: ${user.itemID}`);
 
-        var itemNum = JSON.stringify(user.itemNum);
+        var quantityOrdered = JSON.stringify(user.itemNum);
         // console.log(itemNum);
 
-        console.log(user.itemNum);
+        console.log(`Quantity: ${user.itemNum}`);
 
-    })
-}
+        // after user has placed an order
+        quantityCheck();
 
-// after user has placed and order
-// check quantity if meets customer's request
-// if not, app should log a phrase insufficient quantity!
-// prevent order fro going through
+        function quantityCheck() {
 
-// update SQL database remaining quantity if enough quantity
-// use SET to update
-function updateProduct() {
-    var query = connection.query(
-        "UPDATE products SET ? WHERE ?", [{
-                quantity: quantityLeft
-                    // change to variable
-            },
-            {
-                product: ""
-                    // product selected from prompt above
-            }
-        ],
-        function(err, res) {
-            console.log(res.affectedRows + " updated\n")
+            console.log("Checking Inventory: ");
+            var query = connection.query(`SELECT stock FROM products WHERE id Like '${user.itemNum}'`, function(err, res) {
+                if (err) throw err;
+                console.log(res[0]);
+                // var stock = res[0].stock;
+                // pull the stock
+                console.log(`Current Stock: ${res[0].stock}`);
+                // check quantity if meets customer's request
+                if (res[0].stock < user.itemNum) {
+                    // if not, app should log a phrase insufficient quantity!
+                    console.log("Insufficient Quantity!");
+                    // prevent order from going through
+                    connection.end();
+                } else {
+                    // update SQL database remaining quantity if enough quantity
+                    console.log("Your order is going through!");
+                    // updateProduct();
+                    console.log(`USER ITEM ID: ${user.itemID}`);
+                    console.log(`Quantity Left: ${res[0].stock - user.itemNum}`);
+                    var quantityLeft = res[0].stock - user.itemNum;
+                    var query = connection.query(`UPDATE products SET stock = ${quantityLeft} WHERE id = ${user.itemID}`,
+                        //  [{
+                        //         stock: quantityLeft
+                        //             // change stock to variable
+                        //     },
+                        //     {
+                        //         id: user.itemID
+                        //     }
+                        // ], 
+                        function(err, res) {
+                            if (err) throw err;
+                            console.log(`Remaining Quantity after order: ${quantityLeft}`);
+                            showTotal()
+                        })
+
+                    function showTotal() {
+                        // then show the customer their total
+                        console.log(`Your Total is: `);
+                        var query = connection.query(`SELECT price FROM products WHERE id Like '${user.itemNum}'`, function(err, res) {
+                            if (err) throw err;
+                            // console.log(res[0].price);
+                            console.log(res[0].price * user.itemNum);
+                            connection.end();
+                        })
+                    }
+                }
+
+            });
         }
-    )
+
+
+
+    });
 }
-// then show the customer their total
