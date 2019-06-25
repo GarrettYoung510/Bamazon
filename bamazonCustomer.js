@@ -77,7 +77,7 @@ const userPrompt = function() {
         function quantityCheck() {
 
             console.log("Checking Inventory: ");
-            var query = connection.query(`SELECT stock FROM products WHERE id Like '${user.itemNum}'`, function(err, res) {
+            var query = connection.query(`SELECT stock FROM products WHERE id Like '${user.itemID}'`, function(err, res) {
                 if (err) throw err;
                 console.log(res[0]);
                 // var stock = res[0].stock;
@@ -113,11 +113,11 @@ const userPrompt = function() {
 
                     function showTotal() {
                         // then show the customer their total
-                        console.log(`Your Total is: `);
+                        console.log(`Your Total is ($): `);
                         var query = connection.query(`SELECT price FROM products WHERE id Like '${user.itemNum}'`, function(err, res) {
                             if (err) throw err;
                             // console.log(res[0].price);
-                            console.log(res[0].price * user.itemNum);
+                            console.log(`${res[0].price * user.itemNum}`);
                             connection.end();
                         })
                     }
