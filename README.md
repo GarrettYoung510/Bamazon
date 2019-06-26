@@ -1,6 +1,6 @@
 # Bamazon
 
-![Picture of the program step 1](https://i.lensdump.com/i/WDMIbk.png)
+![Picture of the program step 1](https://i.lensdump.com/i/WDMgrx.png)
 
 ![Picture of the program step 2](https://i.lensdump.com/i/WDMjka.png)
 
