@@ -1,22 +1,26 @@
 # Bamazon
 
-Amazon-like application for customers using Node, Inquirer, and MySQL.
+Amazon-like application for customers using Node, Inquirer, and MySQL. Bamazon simulates buying products querying on what is available in the store as well as updating the database after an order has gone through. 
 
-Bamazon simulates buying products querying on what is available in the store as well as updating the database after an order has gone through. 
 
 Initial Setup of SQL database
+
 ![Picture of the program of sql setup](https://i.lensdump.com/i/WDMQbo.png)
 
 Item List in Node
+
 ![Picture of the item list in node](https://i.lensdump.com/i/WDMgrx.png)
 
 Item Selection in Node
+
 ![Picture of the item selection](https://i.lensdump.com/i/WDMjka.png)
 
 Processing in Node
+
 ![Picture of the output from node after processing](https://i.lensdump.com/i/WDM0le.png)
 
 Updated database
+
 ![Picture of the sql update](https://i.lensdump.com/i/WDM9t9.png)
 
 ## Getting Started
