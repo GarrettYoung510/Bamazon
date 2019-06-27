@@ -40,16 +40,17 @@ function afterConnection() {
         // if any err then we throw it so the user can see it
         // if (err) throw err;
         for (let i = 0; i < res.length; i++) {
+            console.table(`Item ID: ${res[i].id} Product: ${res[i].product} Department: ${res[i].department} Price: ${res[i].price}`);
             // print id
-            console.log(`Item ID: ${res[i].id}`);
-            // product
-            console.log(`Product: ${res[i].product}`);
-            // department
-            console.log(`Department: ${res[i].department}`);
-            // price
-            console.log(`Price: ${res[i].price}`);
+            // console.log(`Item ID: ${res[i].id}`);
+            // // product
+            // console.log(`Product: ${res[i].product}`);
+            // // department
+            // console.log(`Department: ${res[i].department}`);
+            // // price
+            // console.log(`Price: ${res[i].price}`);
             // next item
-            console.log(`**** Next Item ****`);
+            // console.log(`**** Next Item ****`);
         }
         userPrompt();
         // connection.end();
