@@ -12,7 +12,7 @@ Initial Setup of SQL database
 
 Item List in Node
 
-![Picture of the item list in node](https://i.lensdump.com/i/WDMgrx.png)
+![Picture of the item list in node](https://i.lensdump.com/i/WDcPv2.png)
 
 Item Selection in Node
 
