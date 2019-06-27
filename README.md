@@ -10,13 +10,9 @@ Initial Setup of SQL database
 
 ![Picture of the program of sql setup](https://i.lensdump.com/i/WDMQbo.png)
 
-Item List in Node
+Item List & Selection in Node
 
 ![Picture of the item list in node](https://i.lensdump.com/i/WDcPv2.png)
-
-Item Selection in Node
-
-![Picture of the item selection](https://i.lensdump.com/i/WDMjka.png)
 
 Processing in Node
 
